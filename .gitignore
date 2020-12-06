@@ -1,0 +1,7 @@
+.settings
+backup
+ebin
+include
+.project
+*.dump
+src/*.beam
