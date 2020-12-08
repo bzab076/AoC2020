@@ -7,7 +7,7 @@
 %% ====================================================================
 %% API functions
 %% ====================================================================
--export([part1/0, part2/0, getInput/0, getAccumulator2/6]).
+-export([part1/0, part2/0]).
 
 part1() -> getAccumulator(getInput(), 1, [], false, 0).
 
@@ -24,7 +24,7 @@ getInput() -> lists:map(fun(Y) -> {hd(Y), list_to_integer(hd(tl(Y)))} end, lists
 
 
 %% tail recursion for part 1 
-%% IndexList keeps track of already visited indexes, while IsLoop is a guard telling us whether or not the current index has been dealt with twice
+%% IndexList keeps track of already visited indexes, while IsLoop is a guard telling us whether the current index has been dealt with twice
 getAccumulator(InsList, Index, IndexList, IsLoop, Acc) when IsLoop -> Acc;																					  
 getAccumulator(InsList, Index, IndexList, IsLoop, Acc) -> 
       {Ins, Arg} = lists:nth(Index, InsList),
@@ -41,8 +41,8 @@ getAccumulator(InsList, Index, IndexList, IsLoop, Acc) ->
 getAccumulator2(InsList, Index, IndexList, Loop, Chg, Acc) when Loop -> {Acc, Index>length(InsList)};																					  
 getAccumulator2(InsList, Index, IndexList, Loop, Chg, Acc) -> 
       {Ins, Arg} = lists:nth(Index, InsList),
-	  case Index == Chg of
-		  false -> NewIns = Ins;
+	  if 
+		  Index /= Chg -> NewIns = Ins;
 		  true -> 
 			  case Ins of
 				  "acc" ->  NewIns = "acc";

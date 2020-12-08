@@ -11,7 +11,7 @@
 
 part1() -> length(lists:usort(getContainingBagsR(["shiny gold"], getInput(), []))).
 
-part2() -> countContainedBags("shiny gold", getInput()) - 1.  %% subtract 1 becausae shiny gold does not count
+part2() -> countContainedBags("shiny gold", getInput()) - 1.  %% subtract 1 because shiny gold does not count
 
 
 
@@ -54,7 +54,7 @@ getContainingBagsR(ColorList, GeneralList, ACC) ->
 %% part 2
 
 %% get list of bags contained in a given bag C; List must be the input list
-%% for example:  >getContainedBags("shiny gold", day7:getInput())  returns [{1,"shiny coral"},{5,"posh white"},{3,"wavy cyan"}]
+%% for example: getContainedBags("shiny gold", day7:getInput())  returns [{1,"shiny coral"},{5,"posh white"},{3,"wavy cyan"}]
 getContainedBags(_, []) -> [];
 getContainedBags(C, List) -> 
 	{K,Values} = hd(lists:filter(fun({K, Values}) -> K =:= C end, List)),
