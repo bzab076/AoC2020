@@ -23,14 +23,9 @@ part2() -> Sublist = findSublist(inputfile:file2integers("/Users/blaz/eclipse-wo
 %% ====================================================================
 
 
-cartesian([])   -> [];
-cartesian(L) -> [{X,Y}|| X <- L, Y <- L].
-
-sumDif({X,Y}) when X==Y -> -1;
-sumDif({X,Y}) -> X+Y.
-
 %% list of all sums of two distinct elements in the List
-availableSums(List) -> lists:filter(fun(Y) -> Y>0 end, lists:map(fun(X) -> sumDif(X) end, cartesian(List))).
+availableSums([])   -> [];
+availableSums(L) -> [X+Y|| X <- L, Y <- L, X<Y].
 
 %% finds whether Nth element is a sum of two elements from the sublist of lenght Preamble immediately preceding the Nth element
 isMatch(List,Preamble,N) -> lists:member(lists:nth(N, List), availableSums(lists:sublist(List, N - Preamble, Preamble))).
