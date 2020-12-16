@@ -14,7 +14,7 @@ part1() -> lists:foldl(fun(X,Acc) -> X+Acc end, 0, lists:filter(fun(N) -> valid4
 
 %% A rather inefficient way of computing result for part 2. Needs optimization. It takes long time to complete. 
 part2() -> 
-	  {FL, _} = rulesByIndexFld(), %% get list of field with names
+	  {FL, _} = rulesByIndexFld(), %% get list of fields with names
       lists:foldl(fun(X,Acc) -> Acc*lists:nth(X, hd(getTickets())) end, 1, %% multiplies all items in my ticket that match criteria ...
 				  lists:map(fun({X,_}) -> X end, lists:filter(fun({_,[X]}) -> string:find(X, "departure") =:= X end, %% get all field indexes that start with departure
 	  FL))).
@@ -44,12 +44,12 @@ checkNumber(Num, {_,{{X1,Y1},{X2,Y2}}}) -> ((Num >= X1) and (Num =< Y1)) or ((Nu
 valid4AnyField(N) -> lists:foldl(fun(X,Acc) ->  Acc or checkNumber(N,X) end, false, getTicketRules()).
 
 %% is ticket T valid, i.e. all its fields are valid
-isTickedValid(T) -> lists:foldl(fun(N,Acc) -> Acc and valid4AnyField(N) end, true, T).
+isTicketValid(T) -> lists:foldl(fun(N,Acc) -> Acc and valid4AnyField(N) end, true, T).
 
 %% discard invalid ticket as per part 1 rules
-discardInvalidTickects() -> lists:filter(fun(X) -> isTickedValid(X) end, getTickets()).
+discardInvalidTickects() -> lists:filter(fun(X) -> isTicketValid(X) end, getTickets()).
 
-%% does rule matches fields at index Index for all valid tickets
+%% does the rule match fields at index Index for all valid tickets
 ruleMatchesIndex(Rule, Index) -> lists:foldl(fun(X,Acc) -> Acc and checkNumber(lists:nth(Index, X),Rule) end, true, tl(discardInvalidTickects())).
 			
 
