@@ -85,7 +85,10 @@ applyRule(Tile, BlackTiles, NewList) ->
 	   end.
 
 %% apply rules to all tiles in the grid, i.e. a daily iteration
-dayFlip(BlackList) -> lists:foldl(fun(Tile, Acc) -> applyRule(Tile, BlackList, Acc) end, [], [{X,Y}|| X <- lists:seq(-140, 140), Y <- lists:seq(-120, 120), (X + Y) rem 2 == 0]).
+dayFlip(BlackList) -> 
+	{Xs,Ys} = lists:unzip(BlackList),
+	lists:foldl(fun(Tile, Acc) -> applyRule(Tile, BlackList, Acc) end, [], 
+				[{X,Y}|| X <- lists:seq(lists:min(Xs)-2, lists:max(Xs)+2), Y <- lists:seq(lists:min(Ys)-1, lists:max(Ys)+1), (X + Y) rem 2 == 0]).
 
 doDayFlips(BlackList, D, Days) when D > Days -> BlackList;
 doDayFlips(BlackList, D, Days) -> doDayFlips(dayFlip(BlackList), D+1, Days).
