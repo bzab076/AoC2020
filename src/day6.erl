@@ -14,7 +14,7 @@ part1() -> lists:foldl(fun(X,Sum) -> X + Sum end, 0,
 		   ).
 
 part2() -> lists:foldl(fun(X,Sum) -> X + Sum end, 0,
-				lists:map(fun(Y) -> length(commonelements(string:split(Y,":",all))) end, getInput2())
+				lists:map(fun(Y) -> length(commonElements(string:split(Y,":",all))) end, getInput2())
 		   ).
 
 
@@ -23,33 +23,33 @@ part2() -> lists:foldl(fun(X,Sum) -> X + Sum end, 0,
 %% Internal functions
 %% ====================================================================
 
-getInput() -> string:split(lists:flatten(lists:map(fun(X) -> replaceempyline(X) end, inputfile:file2list("input6.txt",""))), "%", all).
+getInput() -> string:split(lists:flatten(lists:map(fun(X) -> replaceEmpyLine(X) end, inputfile:file2list("input6.txt",""))), "%", all).
 
 getInput2() -> string:split(lists:flatten(
-					lists:map( fun(Str) -> appendseparator(Str) end,
-							  lists:map(fun(X) -> replaceempyline(X) end, inputfile:file2list("input6.txt",""))
+					lists:map( fun(Str) -> appendSeparator(Str) end,
+							  lists:map(fun(X) -> replaceEmpyLine(X) end, inputfile:file2list("input6.txt",""))
 					)
 			), "%", all).
 
 
-replaceempyline([[]]) -> ["%"];
-replaceempyline(X) -> X.
+replaceEmpyLine([[]]) -> ["%"];
+replaceEmpyLine(X) -> X.
 
 %% append : after each persons answer for better handling
-appendseparator([Str]) when Str =/= "%" -> [lists:append(Str,":")];
-appendseparator([Str]) -> [Str].
+appendSeparator([Str]) when Str =/= "%" -> [lists:append(Str,":")];
+appendSeparator([Str]) -> [Str].
 
 
-commonelements([],_) -> [];
-commonelements(_, []) -> [];
-commonelements([H1|L1], L2) ->
+commonElements([],_) -> [];
+commonElements(_, []) -> [];
+commonElements([H1|L1], L2) ->
 	case lists:member(H1, L2) of
-		true -> [H1 | commonelements(L1,L2)];
-		false -> commonelements(L1,L2)
+		true -> [H1 | commonElements(L1,L2)];
+		false -> commonElements(L1,L2)
     end.
 
-commonelements([X,[]]) -> X;
-commonelements([X,Y]) -> commonelements(X,Y);
-commonelements([H|T]) -> commonelements(H, commonelements(T)).
+commonElements([X,[]]) -> X;
+commonElements([X,Y]) -> commonElements(X,Y);
+commonElements([H|T]) -> commonElements(H, commonElements(T)).
 
 

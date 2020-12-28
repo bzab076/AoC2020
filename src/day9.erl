@@ -10,10 +10,10 @@
 -export([part1/0, part2/0]).
 
 
-part1() -> lists:nth(findFirstNoMatchIndex(inputfile:file2integers("/Users/blaz/eclipse-workspace/AoC2020ERL/input/input9.txt"),25), 
-					 inputfile:file2integers("/Users/blaz/eclipse-workspace/AoC2020ERL/input/input9.txt")).
+part1() -> lists:nth(findFirstNoMatchIndex(inputfile:file2integers("input9.txt"),25), 
+					 inputfile:file2integers("input9.txt")).
 
-part2() -> Sublist = findSublist(inputfile:file2integers("/Users/blaz/eclipse-workspace/AoC2020ERL/input/input9.txt"),part1()),
+part2() -> Sublist = findSublist(inputfile:file2integers("input9.txt"),part1()),
 		   lists:max(Sublist) + lists:min(Sublist).
 
 

@@ -128,7 +128,7 @@ assembleTiles(Size) -> lists:droplast(assembleTile(1,1,Size,[])).
 %% we start at upper left corner with the tile 1657 which we know is a corner tile
 %% then we recursively assemble the whole matrix
 assembleTile(1,1,Size,_) -> assembleTile(2,1,Size,[[{"1657", 0}]]);
-assembleTile(C,R,Size, Pic) when R > Size -> Pic;
+assembleTile(_,R,Size, Pic) when R > Size -> Pic;
 assembleTile(C,R,Size, Pic) when C > Size -> assembleTile(1,R+1,Size, lists:append(Pic, [[]]));
 assembleTile(C,R,Size, Pic) when C == 1-> assembleTile(C+1,R,Size, appendLast(findMatch(hd(hd(tl(lists:reverse(Pic)))), idList(Pic), fun matchHorizontal/2), Pic));
 assembleTile(C,R,Size, Pic) -> assembleTile(C+1,R,Size, appendLast(findMatch(lists:last(lists:last(Pic)), idList(Pic), fun matchVertical/2), Pic)).

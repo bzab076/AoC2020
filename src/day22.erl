@@ -21,7 +21,7 @@ part2() -> {_, Result} = play2(),
 %% Internal functions
 %% ====================================================================
 
-%% get both decks from input file
+%% get both decks from the input file
 deck1() -> lists:map(fun(X) -> list_to_integer(X) end, lists:sublist(lists:append(inputfile:file2list("input22.txt","")),2,25)).
 deck2() -> lists:map(fun(X) -> list_to_integer(X) end, lists:sublist(lists:append(inputfile:file2list("input22.txt","")),29,25)).
 

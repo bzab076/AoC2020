@@ -20,7 +20,7 @@ part2() -> fib3(possibleAdaptersList(getInput()), length(possibleAdaptersList(ge
 %% Internal functions
 %% ====================================================================
 
-getInput() -> lists:append([0],lists:sort(inputfile:file2integers("/Users/blaz/eclipse-workspace/AoC2020ERL/input/input10.txt"))).
+getInput() -> lists:append([0],lists:sort(inputfile:file2integers("input10.txt"))).
 
 %% creates lits of jolt diffreneces between two adjacent adapters
 joltDiff([]) -> [0];
@@ -29,7 +29,7 @@ joltDiff([H|T]) -> lists:append([hd(T) - H], joltDiff(T)).
 
 
 %% number of adapters that Nth adapter in the List can connect to
-possibleAdapters(N, List, MaxL) when N==MaxL -> 1;
+possibleAdapters(N, _, MaxL) when N==MaxL -> 1;
 possibleAdapters(N, List, MaxL) -> 
 	Element = lists:nth(N, List),
 	length(lists:filter(fun(X) -> (X - Element) =< 3 end, lists:sublist(List, N+1, min(3,MaxL - N)))). 

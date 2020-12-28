@@ -63,7 +63,7 @@ applyIntruction2(Instruction, Mask, Memory) ->
 
 
 %% writes Val at addres Adds in Memory
-%% the funcions uses custom implementation of set in the form of  [{Addr, Val}]
+%% the function uses custom implementation of set in the form of  [{Addr, Val}]
 %% insertion into existing address overrides previous value
 writeMem(Addr, Val, Memory) -> lists:append(lists:filter(fun({A,_}) -> A /= Addr end, Memory), [{Addr, Val}]).
 

@@ -34,11 +34,11 @@ initialState4(Offset) -> lists:foldl(fun(Pair,Acc) -> lists:append(Acc, parseStr
 %% coordinates are shifted by Offset
 parseStr3({_,[]}, _, _, Acc) -> Acc;
 parseStr3({X,[H|T]}, N, Offset, Acc) when H == 35 -> parseStr3({X,T}, N+1, Offset, lists:append(Acc, [{X+Offset,N+Offset,1+Offset}]));
-parseStr3({X,[H|T]}, N, Offset, Acc) -> parseStr3({X,T}, N+1, Offset, Acc).
+parseStr3({X,[_|T]}, N, Offset, Acc) -> parseStr3({X,T}, N+1, Offset, Acc).
 
 parseStr4({_,[]}, _, _, Acc) -> Acc;
 parseStr4({X,[H|T]}, N, Offset, Acc) when H == 35 -> parseStr4({X,T}, N+1, Offset, lists:append(Acc, [{X+Offset,N+Offset,1+Offset,1+Offset}]));
-parseStr4({X,[H|T]}, N, Offset, Acc) -> parseStr4({X,T}, N+1, Offset, Acc).
+parseStr4({X,[_|T]}, N, Offset, Acc) -> parseStr4({X,T}, N+1, Offset, Acc).
 
 %% sum of two tuples
 addTuple3({X1,Y1,Z1}, {X2,Y2,Z2}) -> {X1 + X2, Y1 + Y2, Z1 + Z2}.

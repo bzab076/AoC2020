@@ -7,7 +7,7 @@
 %% ====================================================================
 %% API functions
 %% ====================================================================
--export([part1/0, part2/0, readRules/0, mapRule/1, getInput/0, split8/1]).
+-export([part1/0, part2/0]).
 
      
 part1() -> 
@@ -58,7 +58,7 @@ appendAll(Elements, ListOfLists) -> [lists:append(Elem,L)|| Elem <- Elements, L 
 mapRule(Key) ->
 	{K,V} = lists:keyfind(Key, 1, readRules()),
 	if
-	   length(hd(V)) == 1 ->  V; %% sigle char
+	   length(hd(V)) == 1 ->  V; %% single char
        true ->   lists:append( lists:map(fun(Str) ->  lists:foldl(fun(Chr,Acc) ->  appendAll(Acc, mapRule(list_to_integer(Chr))) end, [], string:split(Str, " ", all)) end, V))   %% multiple strings
     end.
 

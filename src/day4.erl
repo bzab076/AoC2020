@@ -9,11 +9,11 @@
 %% ====================================================================
 -export([part1/0, part2/0]).
 
-part1() -> lists:foldl(fun(X,Sum) -> bool2Int(checkpass(X)) + Sum end,0, getInput()).
+part1() -> lists:foldl(fun(X,Sum) -> bool2Int(checkPass(X)) + Sum end,0, getInput()).
 
-part2() -> lists:foldl(fun(X,Sum) -> bool2Int(checkpass2(X)) + Sum end,0, 
+part2() -> lists:foldl(fun(X,Sum) -> bool2Int(checkPass2(X)) + Sum end,0, 
 					   %% filter passwords according to part1 requirements
-					   lists:filter(fun(X) -> checkpass(X) end, getInput2())).
+					   lists:filter(fun(X) -> checkPass(X) end, getInput2())).
 
 
 %% ====================================================================
@@ -21,18 +21,18 @@ part2() -> lists:foldl(fun(X,Sum) -> bool2Int(checkpass2(X)) + Sum end,0,
 %% ====================================================================
 
 
-getInput() -> string:split(lists:flatten(lists:map(fun(X) -> replaceempyline(X) end, inputfile:file2list("input4.txt",""))), "%", all).
+getInput() -> string:split(lists:flatten(lists:map(fun(X) -> replaceEmpyLine(X) end, inputfile:file2list("input4.txt",""))), "%", all).
 
 getInput2() -> string:split(lists:flatten(
 							  lists:map(fun(S) -> addSpace(S) end, %% need to add additional space to split fileds, e.g. "hgt:170pid:186cm"
-							      lists:map(fun(X) -> replaceempyline(X) end, inputfile:file2list("input4.txt",""))
+							      lists:map(fun(X) -> replaceEmpyLine(X) end, inputfile:file2list("input4.txt",""))
 							   )
 			  ), "% ", all).
 
-replaceempyline([[]]) -> ["%"];
-replaceempyline(X) -> X.
+replaceEmpyLine([[]]) -> ["%"];
+replaceEmpyLine(X) -> X.
 
-checkpass(PL) ->
+checkPass(PL) ->
 	ReqFields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"],
 	lists:foldl(fun(X,Acc) -> (string:str(PL,X) > 0) and Acc end, true, ReqFields).
 
@@ -41,7 +41,7 @@ bool2Int(false) -> 0.
 
 addSpace([Str]) -> [string:concat(Str, " ")].
 
-checkpass2(PL) -> lists:foldl(fun(X,Acc) -> (checkProp(X) and Acc) end, true,  string:split(PL, " ", all)).
+checkPass2(PL) -> lists:foldl(fun(X,Acc) -> (checkProp(X) and Acc) end, true,  string:split(PL, " ", all)).
 
 checkProp([]) -> true;
 checkProp(Str) ->

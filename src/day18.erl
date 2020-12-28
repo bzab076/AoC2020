@@ -52,7 +52,7 @@ splitByPrths([H|T], InCount, InAcc, HeadAcc) ->
 
 
 
-%% performs set of oprerations on a simple string without parenthesis, according to part 1 rules
+%% performs set of operations on a simple string without parenthesis, according to part 1 rules
 simpleOperationStr1(Str) -> simpleOperation1(string:split(string:trim(Str), " ", all)).
 
 simpleOperation1([]) -> 0;
@@ -65,7 +65,7 @@ simpleOperation1([X,Opr,Y|T]) ->
     simpleOperation1(lists:append([integer_to_list(Val)], T)).
 
 
-%% performs set of oprerations on a simple string without parenthesis, according to part 2 rules
+%% performs set of operations on a simple string without parenthesis, according to part 2 rules
 simpleOperationStr2(Str) -> simpleOperation2(string:split(string:trim(Str), " ", all)).
 
 simpleOperation2([]) -> 0;

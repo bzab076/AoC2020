@@ -40,7 +40,7 @@ containsColor(C, [H|T]) ->
 	{K,V} = H,
 	(C =:= V) or containsColor(C,T).
 
-%% gets list of bags that contain a given bag of color C
+%% gets the list of bags that contain a given bag of color C
 getContainingBags(_, []) -> [];
 getContainingBags(C, List) -> lists:map(fun({K,V}) -> K end, lists:filter(fun({_, Values}) -> containsColor(C, Values) end, List)).
 
